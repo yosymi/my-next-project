@@ -1,47 +1,10 @@
 import Image from "next/image";
+import { getMemberList } from "@/app/_libs/microcms";
+import { MEMBERS_LIST_LIMIT } from "@/app/_constants";
 import styles from "./page.module.css";
 
-const data = {
-  contents: [
-    {
-      id: 1,
-      image: {
-        url: "/img-member1.jpg",
-        width: 240,
-        height: 240,
-      },
-      name: "デイビット・チャン",
-      position: "CEO",
-      profile: "グローバルテクノロジー企業での豊富な経験を持つリーダー。",
-    },
-    {
-      id: 2,
-      image: {
-        url: "/img-member2.jpg",
-        width: 240,
-        height: 240,
-      },
-      name: "エミリー・サンダース",
-      position: "COO",
-      profile:
-        "グローバル企業での運営管理と組織改革の経験豊富なエグゼクティブ。",
-    },
-    {
-      id: 3,
-      image: {
-        url: "/img-member3.jpg",
-        width: 240,
-        height: 240,
-      },
-      name: "ジョン・ウィルソン",
-      position: "CTO",
-      profile:
-        "先端技術の研究開発と製品イノベーションの分野で優れた経歴を持つテクノロジーエキスパート。",
-    },
-  ],
-};
-
-export default function Page() {
+export default async function Page() {
+  const data = await getMemberList({ limit: MEMBERS_LIST_LIMIT });
   return (
     <div className={styles.container}>
       {data.contents.length === 0 ? (
